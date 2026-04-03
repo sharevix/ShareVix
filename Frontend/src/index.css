@@ -466,6 +466,102 @@ ul {
   color: #dc2626;
 }
 
+/* Mobile Navbar */
+.mobile-menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--text-main);
+  cursor: pointer;
+  padding: 4px;
+}
+
+@media (max-width: 992px) {
+  .nav-links {
+    margin-left: 0;
+    gap: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .nav-content {
+      gap: 16px;
+  }
+
+  .logo-text, .logo-text-vix {
+    font-size: 1.8rem;
+  }
+
+  .nav-logo {
+    height: 45px;
+    width: 45px;
+  }
+
+  .mobile-menu-btn {
+    display: block;
+    margin-left: 8px;
+  }
+
+  .nav-links {
+    position: fixed;
+    top: 80px;
+    left: -100%;
+    width: 100%;
+    height: calc(100vh - 80px);
+    background: var(--white);
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 40px;
+    gap: 30px;
+    transition: left 0.3s ease;
+    margin: 0;
+    z-index: 999;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  }
+
+  .nav-links.active {
+    left: 0;
+  }
+  
+  .nav-actions {
+    margin-left: auto;
+  }
+
+  .login-btn {
+    padding: 8px 16px;
+  }
+
+  .dropdown {
+    width: 100%;
+  }
+
+  .dropdown-menu {
+    position: static;
+    box-shadow: none;
+    border: none;
+    display: none;
+    min-width: 100%;
+    width: 100%;
+    text-align: center;
+  }
+
+  .dropdown:hover .dropdown-menu,
+  .dropdown:active .dropdown-menu,
+  .dropdown:focus-within .dropdown-menu {
+    display: flex;
+  }
+
+  .dropdown-toggle {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .dropdown-menu::after {
+    display: none;
+  }
+}
+
 /* Change Password Modal */
 .cp-modal-overlay {
   position: fixed;
