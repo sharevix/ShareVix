@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { ChevronDown, LogOut, KeyRound, User } from 'lucide-react'
+import { ChevronDown, LogOut, KeyRound, User, Menu, X } from 'lucide-react'
 import { useAuth } from '../context/AuthContext'
 import logoImg from '../assets/logo_copy.png'
 
@@ -12,6 +12,7 @@ const Navbar = () => {
     const [pwError, setPwError] = useState('')
     const [pwSuccess, setPwSuccess] = useState('')
     const [pwLoading, setPwLoading] = useState(false)
+    const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
     const profileRef = useRef(null)
 
     // Close profile dropdown on outside click
@@ -71,13 +72,13 @@ const Navbar = () => {
                         </Link>
                     </div>
 
-                    <ul className="nav-links">
-                        <li><Link to="/">Home</Link></li>
+                    <ul className={`nav-links ${mobileMenuOpen ? 'active' : ''}`}>
+                        <li><Link to="/" onClick={() => setMobileMenuOpen(false)}>Home</Link></li>
                         {/* <li><Link to="/courses">Courses</Link></li> */}
-                        <li><Link to="/blogs">Blogs</Link></li>
-                        <li><Link to="/reports">Reports</Link></li>
+                        <li><Link to="/blogs" onClick={() => setMobileMenuOpen(false)}>Blogs</Link></li>
+                        <li><Link to="/reports" onClick={() => setMobileMenuOpen(false)}>Reports</Link></li>
                         {/* <li><Link to="/membership">Join The Membership</Link></li> */}
-                        <li><Link to="/contact">Contact Us</Link></li>
+                        <li><Link to="/contact" onClick={() => setMobileMenuOpen(false)}>Contact Us</Link></li>
 
                         {isAdmin() && (
                             <li className="dropdown">
@@ -85,19 +86,19 @@ const Navbar = () => {
                                     Admin <ChevronDown size={18} />
                                 </button>
                                 <div className="dropdown-menu">
-                                    <Link to="/admin/blog-upload" className="dropdown-item">
+                                    <Link to="/admin/blog-upload" className="dropdown-item" onClick={() => setMobileMenuOpen(false)}>
                                         Blog Upload
                                     </Link>
-                                    <Link to="/admin/blog-management" className="dropdown-item">
+                                    <Link to="/admin/blog-management" className="dropdown-item" onClick={() => setMobileMenuOpen(false)}>
                                         Blog Management
                                     </Link>
-                                    <Link to="/admin/report-management" className="dropdown-item">
+                                    <Link to="/admin/report-management" className="dropdown-item" onClick={() => setMobileMenuOpen(false)}>
                                         Report Management
                                     </Link>
-                                    <Link to="/admin/course-upload" className="dropdown-item">
+                                    <Link to="/admin/course-upload" className="dropdown-item" onClick={() => setMobileMenuOpen(false)}>
                                         Course Upload
                                     </Link>
-                                    <Link to="/admin/course-management" className="dropdown-item">
+                                    <Link to="/admin/course-management" className="dropdown-item" onClick={() => setMobileMenuOpen(false)}>
                                         Course Management
                                     </Link>
                                 </div>
@@ -146,8 +147,11 @@ const Navbar = () => {
                                 )}
                             </div>
                         ) : (
-                            <Link to="/login" className="login-btn">Login</Link>
+                            <Link to="/login" className="login-btn" onClick={() => setMobileMenuOpen(false)}>Login</Link>
                         )}
+                        <button className="mobile-menu-btn" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+                            {mobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
+                        </button>
                     </div>
                 </div>
             </nav>
