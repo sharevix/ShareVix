@@ -226,7 +226,7 @@ const BlogEdit = () => {
                                 disabled={loading}
                             >
                                 <option value="">Select a category</option>
-                                <option value="Trading Tips">Trading Tips</option>
+                                <option value="Daily Update">Daily Update</option>
                                 <option value="Market Analysis">Market Analysis</option>
                                 <option value="Crypto News">Crypto News</option>
                                 <option value="Education">Education</option>

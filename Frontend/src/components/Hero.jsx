@@ -1,24 +1,42 @@
 import React from 'react'
-import devanand from '../assets/devanand.jpg'
+import sharevixBg from '../assets/sharevix.jpeg'
 
 const Hero = () => {
     return (
-        <section className="hero grid-bg">
+        <section className="hero" style={{
+            backgroundImage: `url(${sharevixBg})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
+        }}>
+            {/* Dark gradient overlay */}
+            <div className="hero-overlay"></div>
+
             <div className="container hero-content">
                 <div className="hero-text">
+                    {/* <p className="hero-tagline">Welcome to ShareVix</p> */}
                     <h1>
-                        Beyond Basics : <br />
-                        <span style={{ color: 'var(--accent-green)' }}>Pure</span> <span style={{ color: 'var(--primary)' }}>Technical Mastery.</span>
+                        Let's Simplify<br />
+                        <span className="hero-highlight">The Stock Market.</span>
                     </h1>
-                    <p>Master the market with Hyderabad's expert traders. From basics to advanced institutional strategies.</p>
-                    {/* <div style={{ display: 'flex', gap: '16px', marginTop: '32px' }}>
-                        <button className="btn-primary">View Courses </button>
-                        <button className="btn-black" style={{ border: '2px solid var(--border)' }}>Join The Membership</button>
-                    </div> */}
-                </div>
-                <div className="hero-image">
-                    <div className="image-wrapper">
-                        <img src={devanand} alt="Expert Trader" />
+                    <p className="hero-desc">
+                        Master the market with Hyderabad's expert trader. From basics to advanced institutional strategies — learn options trading the right way.
+                    </p>
+                    <div className="hero-stats">
+                        <div className="hero-stat">
+                            <span className="hero-stat-number">10+</span>
+                            <span className="hero-stat-label">Years Experience</span>
+                        </div>
+                        <div className="hero-stat-divider"></div>
+                        <div className="hero-stat">
+                            <span className="hero-stat-number">5K+</span>
+                            <span className="hero-stat-label">Students Mentored</span>
+                        </div>
+                        <div className="hero-stat-divider"></div>
+                        <div className="hero-stat">
+                            <span className="hero-stat-number">95%</span>
+                            <span className="hero-stat-label">Success Rate</span>
+                        </div>
                     </div>
                 </div>
             </div>

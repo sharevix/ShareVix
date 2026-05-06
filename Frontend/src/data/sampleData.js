@@ -35,7 +35,7 @@ export const sampleBlogs = [
     {
         id: 4,
         title: 'Top 10 Trading Strategies for Beginners',
-        category: 'Trading Tips',
+        category: 'Daily Update',
         description: 'Learn the most effective trading strategies that every beginner should know. From swing trading to scalping, master the art of profitable trades.',
         image: 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=400&h=250&fit=crop',
         author: 'Vikram Patel',

@@ -6,93 +6,112 @@ const AboutOwner = () => {
     return (
         <section className="about-owner section-padding" style={{ backgroundColor: '#ffffff' }}>
             <div className="container">
-                <h2 className="section-title">Meet the <span>Founder</span></h2>
-                
-                <div style={{ 
-                    display: 'flex', 
-                    flexDirection: 'column',
+                <h2 className="section-title" style={{ textAlign: 'center', marginBottom: '3rem' }}>Meet the <span>Founder</span></h2>
+
+                <div style={{
+                    display: 'flex',
+                    flexWrap: 'wrap',
                     alignItems: 'center',
-                    maxWidth: '900px',
-                    margin: '1rem auto 0',
-                    padding: '3rem 2rem',
+                    justifyContent: 'center',
+                    gap: '4rem',
+                    maxWidth: '1100px',
+                    margin: '0 auto',
+                    padding: '3rem',
                     backgroundColor: '#fff',
-                    borderRadius: '16px',
-                    boxShadow: '0 10px 30px rgba(0,0,0,0.05)',
+                    borderRadius: '20px',
+                    boxShadow: '0 10px 40px rgba(0,0,0,0.06)',
                     border: '1px solid #f0f0f0'
                 }}>
+                    {/* Left Column: Image */}
                     <div style={{
-                        width: '120px',
-                        height: '120px',
-                        borderRadius: '50%',
+                        flexShrink: 0,
                         display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        marginBottom: '1.5rem',
-                        boxShadow: '0 8px 20px rgba(0,123,255,0.15)',
-                        overflow: 'hidden'
+                        justifyContent: 'center'
                     }}>
-                        <img 
-                            src={devanandImg} 
-                            alt="Devanand Gautre" 
-                            style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
-                        />
-                    </div>
-                    
-                    <h3 style={{ fontSize: '2rem', color: '#1a1a1a', marginBottom: '0.5rem', fontWeight: 'bold' }}>Devanand Gautre</h3>
-                    <p style={{ fontSize: '1.2rem', color: '#007bff', fontWeight: '600', marginBottom: '2rem' }}>
-                        Full-Time Options Trader & Founder of ShareVix
-                    </p>
-                    
-                    <div style={{ 
-                        color: '#555', 
-                        lineHeight: '1.8', 
-                        fontSize: '1.1rem',
-                        textAlign: 'center',
-                        marginBottom: '2.5rem'
-                    }}>
-                        <p style={{ marginBottom: '1rem' }}>
-                            Devanand Gautre holds an M.Tech in Mechanical Engineering and has over 10 years of experience mentoring IES and GATE aspirants.
-                        </p>
-                        <p style={{ marginBottom: '1rem' }}>
-                            He specializes in options trading using quantitative models like Black-Scholes and Put-Call Parity to identify pricing inefficiencies and arbitrage opportunities in the stock market.
-                        </p>
-                        <p>
-                            Through ShareVix, Devanand aims to simplify complex option strategies and help traders build a disciplined, data-driven approach to consistent trading success.
-                        </p>
+                        <div style={{
+                            width: '280px',
+                            height: '280px',
+                            borderRadius: '50%',
+                            padding: '6px',
+                            background: 'linear-gradient(135deg, #007bff, #8a2be2, #ff007f)',
+                            boxShadow: '0 15px 35px rgba(0,123,255,0.2)'
+                        }}>
+                            <img
+                                src={devanandImg}
+                                alt="Devanand Gautre"
+                                style={{
+                                    width: '100%',
+                                    height: '100%',
+                                    borderRadius: '50%',
+                                    objectFit: 'cover',
+                                    border: '6px solid #fff'
+                                }}
+                            />
+                        </div>
                     </div>
 
-                    {/* Highlights */}
-                    <div style={{
-                        display: 'grid',
-                        gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-                        gap: '2rem',
-                        width: '100%',
-                        marginTop: '1rem',
-                        borderTop: '1px solid #eee',
-                        paddingTop: '3rem'
-                    }}>
-                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
-                            <div style={{ background: '#f8f9fa', padding: '1rem', borderRadius: '50%', marginBottom: '1rem' }}>
-                                <BookOpen size={28} color="#007bff" />
-                            </div>
-                            <h4 style={{ fontSize: '1.1rem', marginBottom: '0.5rem', color: '#333' }}>Experienced Educator</h4>
-                            <p style={{ fontSize: '0.95rem', color: '#666' }}>10+ years mentoring IES & GATE aspirants</p>
-                        </div>
-                        
-                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
-                            <div style={{ background: '#f8f9fa', padding: '1rem', borderRadius: '50%', marginBottom: '1rem' }}>
-                                <TrendingUp size={28} color="#007bff" />
-                            </div>
-                            <h4 style={{ fontSize: '1.1rem', marginBottom: '0.5rem', color: '#333' }}>Options Specialist</h4>
-                            <p style={{ fontSize: '0.95rem', color: '#666' }}>Quantitative models & arbitrage opportunities</p>
+                    {/* Right Column: Text */}
+                    <div style={{ flex: '1 1 500px', textAlign: 'left' }}>
+                        <h3 style={{ fontSize: '2.5rem', color: '#1a1a1a', marginBottom: '0.5rem', fontWeight: '800' }}>Devanand Gautre</h3>
+                        <p style={{ fontSize: '1.1rem', color: '#007bff', fontWeight: '700', marginBottom: '1.5rem', textTransform: 'uppercase', letterSpacing: '1px' }}>
+                            Full-Time Options Trader & Founder of ShareVix
+                        </p>
+
+                        <div style={{
+                            color: '#555',
+                            lineHeight: '1.8',
+                            fontSize: '1.1rem',
+                            marginBottom: '2.5rem'
+                        }}>
+                            <p style={{ marginBottom: '1rem' }}>
+                                Devanand Gautre holds an M.Tech in Mechanical Engineering and has over 10 years of experience mentoring IES and GATE aspirants.
+                            </p>
+                            <p style={{ marginBottom: '1rem' }}>
+                                He specializes in options trading using quantitative models like Black-Scholes and Put-Call Parity to identify pricing inefficiencies and arbitrage opportunities in the stock market.
+                            </p>
+                            <p>
+                                Through ShareVix, Devanand aims to simplify complex option strategies and help traders build a disciplined, data-driven approach to consistent trading success.
+                            </p>
                         </div>
 
-                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
-                            <div style={{ background: '#f8f9fa', padding: '1rem', borderRadius: '50%', marginBottom: '1rem' }}>
-                                <Target size={28} color="#007bff" />
+                        {/* Highlights */}
+                        <div style={{
+                            display: 'flex',
+                            flexWrap: 'wrap',
+                            gap: '2.5rem',
+                            borderTop: '1px solid #eee',
+                            paddingTop: '2rem'
+                        }}>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                                <div style={{ background: '#f0f7ff', padding: '0.8rem', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                    <BookOpen size={26} color="#007bff" />
+                                </div>
+                                <div>
+                                    <h4 style={{ fontSize: '1.2rem', marginBottom: '0.1rem', color: '#1a1a1a', fontWeight: '700' }}>10+ Years</h4>
+                                    <p style={{ fontSize: '0.9rem', color: '#666', margin: 0 }}>Mentoring Exp.</p>
+
+                                </div>
                             </div>
-                            <h4 style={{ fontSize: '1.1rem', marginBottom: '0.5rem', color: '#333' }}>Data-Driven Strategy</h4>
-                            <p style={{ fontSize: '0.95rem', color: '#666' }}>Disciplined approach to trading success</p>
+
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                                <div style={{ background: '#f0f7ff', padding: '0.8rem', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                    <TrendingUp size={26} color="#007bff" />
+                                </div>
+                                <div>
+                                    <h4 style={{ fontSize: '1.2rem', marginBottom: '0.1rem', color: '#1a1a1a', fontWeight: '700' }}>Quant Models</h4>
+                                    <p style={{ fontSize: '0.9rem', color: '#666', margin: 0 }}>Options Specialist</p>
+                                </div>
+                            </div>
+
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                                <div style={{ background: '#f0f7ff', padding: '0.8rem', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                    <Target size={26} color="#007bff" />
+                                </div>
+                                <div>
+                                    <h4 style={{ fontSize: '1.2rem', marginBottom: '0.1rem', color: '#1a1a1a', fontWeight: '700' }}>Data-Driven</h4>
+                                    <p style={{ fontSize: '0.9rem', color: '#666', margin: 0 }}>Trading Success</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

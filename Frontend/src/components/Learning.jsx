@@ -19,8 +19,8 @@ const Learning = () => {
             icon: <ArrowRightLeft size={64} strokeWidth={1.5} color="#F59E0B" /> 
         },
         { 
-            title: 'Strategy for Profit Trading', 
-            desc: 'Optimize trades, develop a robust strategy for profitable trading success.',
+            title: 'Technical Analysis Mastery', 
+            desc: 'Gain in-depth knowledge of charts, patterns, and indicators to enhance your market understanding.',
             icon: <Target size={64} strokeWidth={1.5} color="#EF4444" /> 
         }
     ]

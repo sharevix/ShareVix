@@ -69,7 +69,7 @@ export default function Blogs() {
       <div className="blog-page">
         <section className="single-post-hero">
           <div className="container">
-            <button 
+            <button
               className="back-btn"
               onClick={() => setSelectedPost(null)}
             >
@@ -97,8 +97,8 @@ export default function Blogs() {
 
               {selectedPost.featured_image_url && (
                 <div className="featured-image-wrapper">
-                  <img 
-                    src={selectedPost.featured_image_url} 
+                  <img
+                    src={selectedPost.featured_image_url}
                     alt={selectedPost.title}
                     className="featured-image"
                   />
@@ -108,7 +108,7 @@ export default function Blogs() {
               <div className="post-content" dangerouslySetInnerHTML={{ __html: selectedPost.content }} />
 
               <div className="post-footer">
-                <button 
+                <button
                   className="back-btn-bottom"
                   onClick={() => setSelectedPost(null)}
                 >
@@ -124,16 +124,6 @@ export default function Blogs() {
 
   return (
     <div className="blog-page">
-      {/* Hero Section */}
-      {/* <section className="blog-hero">
-        <div className="container">
-          <div className="hero-content">
-            <h1>Trading Insights & Tips</h1>
-            <p>Stay updated with the latest trading strategies, market analysis, and expert advice</p>
-          </div>
-        </div>
-      </section> */}
-
       {/* Search & Filter Section */}
       <section className="blog-controls-section">
         <div className="container">
@@ -206,7 +196,7 @@ export default function Blogs() {
                       {stripHtml(post.description || post.content).substring(0, 120)}...
                     </p>
 
-                    <button 
+                    <button
                       className="read-more-btn"
                       onClick={() => setSelectedPost(post)}
                     >
@@ -222,7 +212,7 @@ export default function Blogs() {
               <div className="no-results-icon">🔍</div>
               <h3>No articles found</h3>
               <p>Try adjusting your search terms</p>
-              <button 
+              <button
                 className="clear-search-btn"
                 onClick={() => setSearchTerm("")}
               >
