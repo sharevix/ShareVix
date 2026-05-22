@@ -23,8 +23,8 @@ const TradingTips = () => {
                     post.category === 'Daily Update' &&
                     (!post.tags ||
                         post.tags.length === 0 ||
-                        (Array.isArray(post.tags) && post.tags.some(t => t.toLowerCase() === 'blogs')) ||
-                        (typeof post.tags === 'string' && post.tags.toLowerCase() === 'blogs'))
+                        (Array.isArray(post.tags) && post.tags.some(t => t.toLowerCase() === 'reports')) ||
+                        (typeof post.tags === 'string' && post.tags.toLowerCase() === 'reports'))
                 );
 
                 setTips(tradingTips);

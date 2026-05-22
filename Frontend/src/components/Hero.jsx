@@ -26,7 +26,7 @@ const Hero = () => {
                         <a href="https://docs.google.com/forms/d/e/1FAIpQLSdMwNdPa6otkDswxKKmqJoqzt9lCaCXZF_gY_-86H0o009Mkw/viewform" target="_blank" rel="noopener noreferrer" className="btn-demo-glow">
                             <div className="btn-demo-content" style={{ display: 'block', textAlign: 'left' }}>
                                 <div className="btn-demo-title">Register for the FREE Live Demo Session 🚀</div>
-                                <div className="btn-demo-date">25th May 2026 | Sunday</div>
+                                <div className="btn-demo-date">25th May 2026 | Sunday | 10:00 AM - 12:00 PM</div>
                             </div>
                             <svg xmlns="http://www.w3.org/2000/svg" className="icon-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                         </a>
