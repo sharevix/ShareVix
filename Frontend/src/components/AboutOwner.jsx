@@ -1,6 +1,6 @@
 import React from 'react';
 import { User, TrendingUp, BookOpen, Target } from 'lucide-react';
-import devanandImg from '../assets/devanand.jpg';
+import devanandImg from '../assets/devanand.jpeg';
 
 const AboutOwner = () => {
     return (
@@ -33,7 +33,7 @@ const AboutOwner = () => {
                             height: '280px',
                             borderRadius: '50%',
                             padding: '6px',
-                            background: 'linear-gradient(135deg, #007bff, #8a2be2, #ff007f)',
+                        //    background: 'linear-gradient(135deg, #007bff, #8a2be2, #ff007f)',
                             boxShadow: '0 15px 35px rgba(0,123,255,0.2)'
                         }}>
                             <img
@@ -44,7 +44,7 @@ const AboutOwner = () => {
                                     height: '100%',
                                     borderRadius: '50%',
                                     objectFit: 'cover',
-                                    border: '6px solid #fff'
+                                //    border: '6px solid #fff'
                                 }}
                             />
                         </div>
