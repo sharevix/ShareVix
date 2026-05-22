@@ -1,5 +1,6 @@
 .tips-section {
     background-color: transparent;
+    padding-bottom: 0px !important;
 }
 
 .tips-header {
@@ -92,8 +93,8 @@
 }
 
 .tip-icon {
-    width: 60px;
-    height: 60px;
+    width: 180px;
+    height: 90px;
     margin-bottom: 16px;
     display: flex;
     align-items: center;
