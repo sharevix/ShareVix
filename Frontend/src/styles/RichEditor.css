@@ -189,6 +189,45 @@
   height: auto;
 }
 
+/* Color Picker Styles */
+.color-picker-container {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  position: relative;
+}
+
+.color-picker-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid #ddd;
+  background: white;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: #333;
+}
+
+.color-picker-label:hover {
+  background: #e9ecef;
+  border-color: #adb5bd;
+}
+
+.color-picker-label svg {
+  stroke-width: 2.5;
+}
+
+.color-picker-input {
+  position: absolute;
+  width: 0;
+  height: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
 /* Responsive design */
 @media (max-width: 768px) {
   .editor-toolbar {

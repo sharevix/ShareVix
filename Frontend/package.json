@@ -12,7 +12,9 @@
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
     "@tiptap/core": "^3.20.1",
+    "@tiptap/extension-color": "^3.23.6",
     "@tiptap/extension-font-family": "^3.20.1",
+    "@tiptap/extension-highlight": "^3.23.6",
     "@tiptap/extension-image": "^3.19.0",
     "@tiptap/extension-link": "^3.19.0",
     "@tiptap/extension-text-align": "^3.19.0",

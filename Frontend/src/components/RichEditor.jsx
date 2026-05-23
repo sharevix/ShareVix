@@ -9,6 +9,8 @@ import TextAlign from '@tiptap/extension-text-align'
 import Underline from '@tiptap/extension-underline'
 import { Extension } from '@tiptap/core'
 import BulletList from '@tiptap/extension-bullet-list'
+import Color from '@tiptap/extension-color'
+import Highlight from '@tiptap/extension-highlight'
 import { mediaAPI } from '../services/api'
 
 const FontSize = Extension.create({
@@ -88,7 +90,9 @@ import {
   Image as ImageIcon,
   Link as LinkIcon,
   Copy,
-  Loader
+  Loader,
+  Palette,
+  Highlighter
 } from 'lucide-react'
 import '../styles/RichEditor.css'
 
@@ -109,6 +113,8 @@ const RichEditor = ({ content, onChange, blogId, ownerType = 'blog', ownerId }) 
       TextStyle,
       FontFamily,
       FontSize,
+      Color.configure({ types: ['textStyle'] }),
+      Highlight.configure({ multicolor: true }),
     ],
     content: content,
     onUpdate: ({ editor }) => {
@@ -514,6 +520,35 @@ const RichEditor = ({ content, onChange, blogId, ownerType = 'blog', ownerId }) 
             <Copy size={18} />
           </button>
         </div>
+
+        <div className="toolbar-group">
+          <div className="color-picker-container">
+            <label htmlFor="text-color" title="Text Color" className="color-picker-label">
+              <Palette size={18} />
+            </label>
+            <input
+              id="text-color"
+              type="color"
+              value={editor.getAttributes('textStyle').color || '#000000'}
+              onChange={e => editor.chain().focus().setColor(e.target.value).run()}
+              className="color-picker-input"
+              title="Change text color"
+            />
+          </div>
+          <div className="color-picker-container">
+            <label htmlFor="highlight-color" title="Text Highlight" className="color-picker-label">
+              <Highlighter size={18} />
+            </label>
+            <input
+              id="highlight-color"
+              type="color"
+              value={editor.getAttributes('highlight').color || '#FFFF00'}
+              onChange={e => editor.chain().focus().toggleHighlight({ color: e.target.value }).run()}
+              className="color-picker-input"
+              title="Change highlight color"
+            />
+          </div>
+        </div>
       </div>
 
       <div className="editor-content">
@@ -524,4 +559,3 @@ const RichEditor = ({ content, onChange, blogId, ownerType = 'blog', ownerId }) 
 }
 
 export default RichEditor
-
