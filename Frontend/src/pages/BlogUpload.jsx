@@ -4,7 +4,7 @@ import { useAuth } from '../context/AuthContext'
 import AdminLayout from '../components/Admin/AdminLayout'
 import { blogAPI } from '../services/api'
 import RichEditor from '../components/RichEditor'
-import { Upload, X, Check, AlertCircle } from 'lucide-react'
+import { Upload, X, Check, AlertCircle, FileText, Download } from 'lucide-react'
 import '../styles/BlogUpload.css'
 
 const BlogUpload = () => {
@@ -20,6 +20,7 @@ const BlogUpload = () => {
   })
 
   const [previewImage, setPreviewImage] = useState(null)
+  const [pdfFiles, setPdfFiles] = useState([])
   const [loading, setLoading] = useState(false)
   const [success, setSuccess] = useState(false)
   const [error, setError] = useState('')
@@ -60,6 +61,27 @@ const BlogUpload = () => {
       reader.readAsDataURL(file)
       setError('')
     }
+  }
+
+  const handlePdfUpload = (e) => {
+    const files = Array.from(e.target.files || [])
+    
+    files.forEach(file => {
+      if (file.type === 'application/pdf') {
+        if (file.size > 50 * 1024 * 1024) { // 50MB limit for PDFs
+          setError('PDF size should be less than 50MB')
+          return
+        }
+        setPdfFiles(prev => [...prev, file])
+        setError('')
+      } else {
+        setError('Please upload PDF files only')
+      }
+    })
+  }
+
+  const removePdfFile = (index) => {
+    setPdfFiles(prev => prev.filter((_, i) => i !== index))
   }
 
   useEffect(() => {
@@ -112,6 +134,11 @@ const BlogUpload = () => {
         apiFormData.append('featured_image', formData.featuredImage)
       }
 
+      // Add PDF files
+      pdfFiles.forEach((pdfFile) => {
+        apiFormData.append('files', pdfFile)
+      })
+
       await blogAPI.createWithMedia(apiFormData)
 
       setSuccess(true)
@@ -124,6 +151,7 @@ const BlogUpload = () => {
         tags: 'Blogs'
       })
       setPreviewImage(null)
+      setPdfFiles([])
 
       setTimeout(() => {
         setSuccess(false)
@@ -263,7 +291,58 @@ const BlogUpload = () => {
         </div>
 
         <div className="form-section">
-          <h2>Blog Content</h2>
+          <h2>PDF Document (Optional)</h2>
+          <div className="form-group">
+            <label htmlFor="pdfFile">Upload PDF Files</label>
+            <p className="helper-text">Upload one or more PDF documents to attach to this blog post or report</p>
+            <div className="file-upload-wrapper">
+              <input
+                type="file"
+                id="pdfFile"
+                accept=".pdf"
+                onChange={handlePdfUpload}
+                disabled={loading}
+                multiple
+              />
+              <div className="upload-area" onClick={() => document.getElementById('pdfFile').click()}>
+                <Upload size={32} />
+                <p>Click to upload PDF files</p>
+                <span>PDF files up to 50MB each</span>
+              </div>
+            </div>
+
+            {pdfFiles.length > 0 && (
+              <div className="pdf-files-list">
+                <h3>Selected PDF Files ({pdfFiles.length})</h3>
+                <ul>
+                  {pdfFiles.map((file, index) => (
+                    <li key={index} className="pdf-file-item">
+                      <div className="pdf-file-info">
+                        <FileText size={20} />
+                        <div className="pdf-file-details">
+                          <p className="pdf-file-name">{file.name}</p>
+                          <p className="pdf-file-size">
+                            {(file.size / (1024 * 1024)).toFixed(2)} MB
+                          </p>
+                        </div>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() => removePdfFile(index)}
+                        className="remove-pdf-btn"
+                        disabled={loading}
+                      >
+                        <X size={16} />
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </div>
+        </div>
+
+        <div className="form-section">
           <div className="form-group">
             <label>Content * (Similar to Word Document)</label>
             <p className="helper-text">
@@ -291,6 +370,7 @@ const BlogUpload = () => {
                 tags: 'Blogs'
               })
               setPreviewImage(null)
+              setPdfFiles([])
             }}
           >
             Clear Form

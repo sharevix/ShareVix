@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Calendar, User, Search, Loader, AlertCircle, ArrowRight, ChevronRight } from "lucide-react";
+import { Calendar, User, Search, Loader, AlertCircle, ArrowRight, ChevronRight, FileText, Download } from "lucide-react";
 import "../styles/Blog.css";
 import { blogAPI } from "../services/api";
 
@@ -104,6 +104,44 @@ export default function Reports() {
               )}
 
               <div className="post-content" dangerouslySetInnerHTML={{ __html: selectedPost.content }} />
+
+              {selectedPost.media && selectedPost.media.length > 0 && selectedPost.media.some(m => m.asset_type === 'document') && (
+                <div className="pdf-section">
+                  <h3>📄 Attached Documents</h3>
+                  <div className="pdf-list">
+                    {selectedPost.media
+                      .filter(m => m.asset_type === 'document')
+                      .map((pdf, index) => (
+                        <div key={index} className="pdf-item">
+                          <div className="pdf-item-info">
+                            <FileText size={24} className="pdf-icon" />
+                            <div className="pdf-details">
+                              <p className="pdf-name">
+                                {pdf.url.split('/').pop() || `Document ${index + 1}`}
+                              </p>
+                              <a
+                                href={pdf.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="pdf-link"
+                              >
+                                View PDF
+                              </a>
+                            </div>
+                          </div>
+                          <a
+                            href={pdf.url}
+                            download
+                            className="download-btn"
+                            title="Download PDF"
+                          >
+                            <Download size={18} />
+                          </a>
+                        </div>
+                      ))}
+                  </div>
+                </div>
+              )}
 
               <div className="post-footer">
                 <button

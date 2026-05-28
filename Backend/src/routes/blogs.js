@@ -453,6 +453,7 @@ export async function updateBlogWithMedia(request, env, supabase, user, blogId) 
         const description = formData.get('description');
         const tagsStr = formData.get('tags');
         const removeFeaturedImage = formData.get('remove_featured_image') === 'true';
+        const removeMediaIdsStr = formData.get('remove_media_ids');
 
         // Build update object with only provided fields
         const updates = { updated_at: new Date().toISOString() };
@@ -527,6 +528,80 @@ export async function updateBlogWithMedia(request, env, supabase, user, blogId) 
                 is_private: false,
                 created_at: new Date().toISOString()
             }]);
+        }
+
+        // Handle media removal (delete specific files)
+        if (removeMediaIdsStr) {
+            try {
+                const mediaIdsToRemove = JSON.parse(removeMediaIdsStr);
+                if (Array.isArray(mediaIdsToRemove) && mediaIdsToRemove.length > 0) {
+                    // Get the media files to delete
+                    const { data: mediaToDelete } = await supabase
+                        .from('media_assets')
+                        .select('file_key, url')
+                        .in('id', mediaIdsToRemove)
+                        .eq('owner_id', blogId);
+
+                    // Delete from ImageKit
+                    if (mediaToDelete) {
+                        for (const media of mediaToDelete) {
+                            if (media.file_key) {
+                                await deleteFromImageKit(env, media.file_key).catch(e => console.error('Delete media error:', e));
+                            }
+                        }
+                    }
+
+                    // Delete from database
+                    await supabase
+                        .from('media_assets')
+                        .delete()
+                        .in('id', mediaIdsToRemove);
+                }
+            } catch (err) {
+                console.error('Media removal error:', err);
+            }
+        }
+
+        // Handle new file uploads (PDFs, documents, etc.)
+        const files = formData.getAll('files');
+        const uploadedMedia = [];
+        const isPrivate = formData.get('is_private') === 'true';
+
+        for (const file of files) {
+            if (!file || !file.name) continue;
+
+            try {
+                const mimeType = file.type || '';
+                let assetType = 'document';
+                if (mimeType.startsWith('image/')) assetType = 'image';
+                else if (mimeType.startsWith('video/')) assetType = 'video';
+
+                const folder = isPrivate ? '/private/blogs' : '/blogs';
+                const result = await uploadToImageKit(env, file, file.name, folder);
+
+                const { data: mediaAsset, error: mediaError } = await supabase
+                    .from('media_assets')
+                    .insert([{
+                        file_key: result.fileId,
+                        url: result.url,
+                        owner_type: 'blog',
+                        owner_id: blogId,
+                        asset_type: assetType,
+                        is_private: isPrivate,
+                        created_at: new Date().toISOString()
+                    }])
+                    .select()
+                    .single();
+
+                if (!mediaError) {
+                    uploadedMedia.push({
+                        ...mediaAsset,
+                        ...result
+                    });
+                }
+            } catch (err) {
+                console.error('File upload error:', err);
+            }
         }
 
         // Associate any new inline images
