@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 // ...existing code...
-import { Calendar, User, Search, Loader, AlertCircle, ArrowRight, ChevronRight } from "lucide-react";
+import { Calendar, User, Search, Loader, AlertCircle, ArrowRight, ChevronRight, FileText, Download } from "lucide-react";
 import "../styles/Blog.css";
 import { blogAPI } from "../services/api";
 
