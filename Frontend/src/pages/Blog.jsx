@@ -20,7 +20,11 @@ export default function Blogs() {
   useEffect(() => {
     if (!selectedPost) {
       setSelectedPdfUrl(null);
+      return;
     }
+
+    const firstDocument = selectedPost.media?.find((m) => m.asset_type === "document");
+    setSelectedPdfUrl(firstDocument?.url || null);
   }, [selectedPost]);
 
   const fetchBlogs = async () => {
