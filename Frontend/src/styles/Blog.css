@@ -708,6 +708,39 @@
   transform: translateY(-2px);
 }
 
+.pdf-viewer {
+  margin-top: 24px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  overflow: hidden;
+  background: white;
+}
+
+.pdf-viewer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  background: #fafafa;
+  border-bottom: 1px solid #e0e0e0;
+  font-weight: 600;
+  color: #333;
+}
+
+.close-pdf-viewer {
+  background: transparent;
+  border: none;
+  color: #007bff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.pdf-viewer-iframe {
+  width: 100%;
+  min-height: 560px;
+  border: none;
+}
+
 @media (max-width: 768px) {
   .pdf-item {
     flex-direction: column;

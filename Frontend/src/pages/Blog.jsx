@@ -9,12 +9,19 @@ export default function Blogs() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [selectedPost, setSelectedPost] = useState(null);
+  const [selectedPdfUrl, setSelectedPdfUrl] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [filterCategory, setFilterCategory] = useState("all");
 
   useEffect(() => {
     fetchBlogs();
   }, []);
+
+  useEffect(() => {
+    if (!selectedPost) {
+      setSelectedPdfUrl(null);
+    }
+  }, [selectedPost]);
 
   const fetchBlogs = async () => {
     try {
@@ -121,14 +128,13 @@ export default function Blogs() {
                               <p className="pdf-name">
                                 {pdf.url.split('/').pop() || `Document ${index + 1}`}
                               </p>
-                              <a
-                                href={pdf.url}
-                                target="_blank"
-                                rel="noopener noreferrer"
+                              <button
+                                type="button"
                                 className="pdf-link"
+                                onClick={() => setSelectedPdfUrl(pdf.url)}
                               >
                                 View PDF
-                              </a>
+                              </button>
                             </div>
                           </div>
                           <a
@@ -142,6 +148,25 @@ export default function Blogs() {
                         </div>
                       ))}
                   </div>
+                  {selectedPdfUrl && (
+                    <div className="pdf-viewer">
+                      <div className="pdf-viewer-header">
+                        <span>PDF Preview</span>
+                        <button
+                          type="button"
+                          className="close-pdf-viewer"
+                          onClick={() => setSelectedPdfUrl(null)}
+                        >
+                          Close
+                        </button>
+                      </div>
+                      <iframe
+                        src={selectedPdfUrl}
+                        title="PDF preview"
+                        className="pdf-viewer-iframe"
+                      />
+                    </div>
+                  )}
                 </div>
               )}
 
