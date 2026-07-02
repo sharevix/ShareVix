@@ -10,6 +10,7 @@ export default function Blogs() {
   const [error, setError] = useState(null);
   const [selectedPost, setSelectedPost] = useState(null);
   const [selectedPdfUrl, setSelectedPdfUrl] = useState(null);
+  const [isMobile, setIsMobile] = useState(() => window.innerWidth <= 768);
   const [searchTerm, setSearchTerm] = useState("");
   const [filterCategory, setFilterCategory] = useState("all");
 
@@ -18,14 +19,19 @@ export default function Blogs() {
   }, []);
 
   useEffect(() => {
-    if (!selectedPost) {
-      setSelectedPdfUrl(null);
-      return;
-    }
+    const onResize = () => setIsMobile(window.innerWidth <= 768);
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
+
+  useEffect(() => {
+    if (!selectedPost || isMobile) return;
 
     const firstDocument = selectedPost.media?.find((m) => m.asset_type === "document");
-    setSelectedPdfUrl(firstDocument?.url || null);
-  }, [selectedPost]);
+    if (firstDocument?.url) {
+      setSelectedPdfUrl(firstDocument.url);
+    }
+  }, [selectedPost, isMobile]);
 
   const fetchBlogs = async () => {
     try {
@@ -75,6 +81,15 @@ export default function Blogs() {
     (post.content && typeof post.content === 'string' && stripHtml(post.content).toLowerCase().includes(searchTerm.toLowerCase()))
   );
 
+  const handlePdfAction = (pdfUrl) => {
+    if (isMobile) {
+      window.open(pdfUrl, "_blank", "noopener,noreferrer");
+      return;
+    }
+
+    setSelectedPdfUrl(pdfUrl);
+  };
+
   if (selectedPost) {
     return (
       <div className="blog-page">
@@ -120,7 +135,7 @@ export default function Blogs() {
 
               {selectedPost.media && selectedPost.media.length > 0 && selectedPost.media.some(m => m.asset_type === 'document') && (
                 <div className="pdf-section">
-                  <h3>📄 Attached Documents</h3>
+                  {/* <h3>📄 Attached Documents</h3> */}
                   <div className="pdf-list">
                     {selectedPost.media
                       .filter(m => m.asset_type === 'document')
@@ -132,37 +147,26 @@ export default function Blogs() {
                               <p className="pdf-name">
                                 {pdf.url.split('/').pop() || `Document ${index + 1}`}
                               </p>
-                              <button
-                                type="button"
-                                className="pdf-link"
-                                onClick={() => setSelectedPdfUrl(pdf.url)}
-                              >
-                                View PDF
-                              </button>
                             </div>
                           </div>
-                          <a
-                            href={pdf.url}
-                            download
-                            className="download-btn"
-                            title="Download PDF"
-                          >
-                            <Download size={18} />
-                          </a>
+                          {isMobile && (
+                            <button
+                              type="button"
+                              className="download-btn"
+                              title="Open PDF"
+                              onClick={() => handlePdfAction(pdf.url)}
+                            >
+                              <Download size={18} />
+                              <span>Open</span>
+                            </button>
+                          )}
                         </div>
                       ))}
                   </div>
-                  {selectedPdfUrl && (
+                  {!isMobile && selectedPdfUrl && (
                     <div className="pdf-viewer">
                       <div className="pdf-viewer-header">
                         <span>PDF Preview</span>
-                        <button
-                          type="button"
-                          className="close-pdf-viewer"
-                          onClick={() => setSelectedPdfUrl(null)}
-                        >
-                          Close
-                        </button>
                       </div>
                       <div className="pdf-viewer-frame">
                         <iframe
