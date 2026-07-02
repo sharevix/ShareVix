@@ -162,11 +162,14 @@ export default function Reports() {
                           Close
                         </button>
                       </div>
-                      <iframe
-                        src={selectedPdfUrl}
-                        title="PDF preview"
-                        className="pdf-viewer-iframe"
-                      />
+                      <div className="pdf-viewer-frame">
+                        <iframe
+                          src={selectedPdfUrl}
+                          title="PDF preview"
+                          className="pdf-viewer-iframe"
+                          allowFullScreen
+                        />
+                      </div>
                     </div>
                   )}
                 </div>

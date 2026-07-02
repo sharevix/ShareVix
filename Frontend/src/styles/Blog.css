@@ -735,9 +735,16 @@
   cursor: pointer;
 }
 
+.pdf-viewer-frame {
+  display: flex;
+  flex-direction: column;
+}
+
 .pdf-viewer-iframe {
   width: 100%;
   min-height: 560px;
+  height: 80vh;
+  max-height: calc(100vh - 220px);
   border: none;
 }
 
