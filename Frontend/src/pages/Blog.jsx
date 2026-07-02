@@ -69,6 +69,20 @@ export default function Blogs() {
     return post.author_name || post.users?.name || "Unknown";
   };
 
+  const isMobileDevice = () => {
+    if (typeof navigator === "undefined") return false;
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+  };
+
+  const openPdf = (url) => {
+    if (isMobileDevice()) {
+      window.open(url, "_blank", "noopener,noreferrer");
+      setSelectedPdfUrl(null);
+      return;
+    }
+    setSelectedPdfUrl(url);
+  };
+
   const filteredBlogs = blogs.filter(post =>
     (post.title && typeof post.title === 'string' && post.title.toLowerCase().includes(searchTerm.toLowerCase())) ||
     (post.description && typeof post.description === 'string' && post.description.toLowerCase().includes(searchTerm.toLowerCase())) ||
@@ -135,7 +149,7 @@ export default function Blogs() {
                               <button
                                 type="button"
                                 className="pdf-link"
-                                onClick={() => setSelectedPdfUrl(pdf.url)}
+                                onClick={() => openPdf(pdf.url)}
                               >
                                 View PDF
                               </button>
