@@ -90,6 +90,23 @@ export default function Blogs() {
     setSelectedPdfUrl(pdfUrl);
   };
 
+  const handlePdfDownload = async (pdfUrl) => {
+    try {
+      const response = await fetch(pdfUrl);
+      const blob = await response.blob();
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = pdfUrl.split("/").pop() || "document.pdf";
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      URL.revokeObjectURL(url);
+    } catch (err) {
+      window.open(pdfUrl, "_blank", "noopener,noreferrer");
+    }
+  };
+
   if (selectedPost) {
     return (
       <div className="blog-page">
@@ -150,15 +167,24 @@ export default function Blogs() {
                             </div>
                           </div>
                           {isMobile && (
-                            <button
-                              type="button"
-                              className="download-btn"
-                              title="Open PDF"
-                              onClick={() => handlePdfAction(pdf.url)}
-                            >
-                              <Download size={18} />
-                              <span>Open</span>
-                            </button>
+                            <div className="pdf-actions">
+                              <button
+                                type="button"
+                                className="open-btn"
+                                title="Open PDF"
+                                onClick={() => handlePdfAction(pdf.url)}
+                              >
+                                Open
+                              </button>
+                              <button
+                                type="button"
+                                className="download-btn"
+                                title="Download PDF"
+                                onClick={() => handlePdfDownload(pdf.url)}
+                              >
+                                <Download size={18} />
+                              </button>
+                            </div>
                           )}
                         </div>
                       ))}
